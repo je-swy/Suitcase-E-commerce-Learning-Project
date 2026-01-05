@@ -1,5 +1,3 @@
-# Project template
-
 # Best Shop - Suitcase E-commerce Project
 
 This is a fully responsive, multi-page e-commerce website for a suitcase store, built as part of a learning project. The application is created using HTML, SCSS, and vanilla JavaScript, with a strong focus on clean code, reusability, and modern development practices.
