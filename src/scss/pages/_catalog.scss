@@ -2,12 +2,12 @@
 @use "../abstracts/mixins" as mixins;
 
 .catalog {
-  @include mixins.grid(1fr, auto, 30px); // 1 колонка для мобільних
+  @include mixins.grid(1fr, auto, 30px);
   margin-top: 30px;
   margin-bottom: 50px;
 
   @include mixins.respond(tablet) {
-    grid-template-columns: 3fr 1fr; // 2 колонки для планшетів і вище
+    grid-template-columns: 3fr 1fr;
   }
 
   &-controls {
@@ -47,20 +47,18 @@
     }
 
     .filter-item-title {
-      // Це тепер тег <legend>
       @include mixins.fonts(vars.$mont-font, 17px, 17px, bold, vars.$dark-grey);
       margin-bottom: 12px;
     }
 
     .filter-item-data {
-      position: relative; // Контейнер для кнопки і списку
+      position: relative;
       width: auto;
       @include mixins.respond(tablet) {
         width: 200px;
       }
     }
 
-    // Кнопка, що відкриває випадаючий список
     button.filter-label {
       width: 100%;
       @include mixins.flex-row(space-between, center, 8px);
@@ -102,10 +100,6 @@
         visibility 0s 0.15s;
       z-index: 40;
 
-      li {
-        padding: 0; // li тепер тільки контейнер
-      }
-
       label {
         display: block;
         padding: 8px 12px;
@@ -140,7 +134,6 @@
       }
     }
 
-    // JS-керований стан для відкритого списку
     .filter-item.is-open {
       button.filter-label {
         border-color: vars.$pink;
@@ -191,7 +184,6 @@
   }
 }
 
-// Залишаю цей блок, можливо він використовується для інших чекбоксів
 .filter-item_checkbox {
   @include mixins.flex-column(flex-start, center, 8px);
   background: vars.$white;

@@ -9,56 +9,63 @@
 // Default to empty string if input is falsy
 // Example: esc('<script>') => '&lt;script&gt;'
 
-export function esc (s = '') {
-  return String(s).replaceAll(
-    /[&<>']/g, // <-- Залишили тільки одну
-    (c) =>
-      ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      })[c]
-  );
+// file: product-renderer.js
+
+const isPagesFolder = window.location.pathname.includes('/pages/');
+
+const pathPrefix = isPagesFolder ? '..' : '.';
+
+export function esc(s = '') {
+  return String(s).replaceAll(/[&<>']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[c]);
 }
 
-// Resolve asset path for images or other resources
-export function resolveAssetPath (path = '') {
+export function resolveAssetPath(path = '') {
   const p = String(path).trim();
   if (!p || p === 'false') return '';
 
-  if (p.startsWith('/')) {
-    return p;
-  }
-  return `/${p}`;
-}
+  if (p.startsWith('http') || p.startsWith('data:')) return p;
 
-// Render a block of products into a specified container
-export function renderBlock ({ products = [], containerSelector, limit }) {
+  let cleanPath = p.startsWith('/') ? p.slice(1) : p;
+
+  if (cleanPath.startsWith('./')) {
+    cleanPath = cleanPath.slice(2);
+  }
+
+  if (cleanPath.startsWith('src/')) {
+    cleanPath = cleanPath.slice(4);
+  }
+
+  return `${pathPrefix}/${cleanPath}`;
+}
+export function renderBlock({ products = [], containerSelector, limit }) {
   const container = document.querySelector(containerSelector);
   if (!container) {
-    console.warn('renderBlock: container not found', containerSelector);
+    // console.warn('renderBlock: container not found', containerSelector);
     return;
   }
   const items = limit ? (products || []).slice(0, limit) : products || [];
   container.innerHTML = items.map((p) => productToHtml(p)).join('');
 }
 
-// Convert a single product object to its HTML representation
-// p: product object with properties like id, name, price, imageUrl, salesStatus
-// returns: HTML string for the product card
-export function productToHtml (p = {}) {
+export function productToHtml(p = {}) {
   const id = esc(p.id ?? p.sku ?? '');
   const title = esc(p.name ?? p.title ?? 'Unnamed product');
   const rawThumb = p.imageUrl ?? p.image ?? '';
+
   const finalSrc = resolveAssetPath(rawThumb);
 
   const badge = p.salesStatus
-    // eslint-disable-next-line quotes
     ? `<span class='product-card__badge'>SALE</span>`
     : '';
-  const nameLink = `/src/pages/product-details-template.html?id=${encodeURIComponent(id)}`;
+
+  const linkBase = isPagesFolder ? '.' : './pages';
+  const nameLink = `${linkBase}/product-details-template.html?id=${encodeURIComponent(id)}`;
 
   return `
 <li class='product-card' data-id='${esc(id)}' role='listitem'>

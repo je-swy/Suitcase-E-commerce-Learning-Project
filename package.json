@@ -12,7 +12,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "sass --watch src/scss/main.scss src/js/main.css",
+    "scss": "sass --watch src/scss/main.scss src/css/main.css",
     "lint": "npm run lint:js && npm run lint:scss",
     "lint:js": "eslint src/js/**/*.js",
     "lint:scss": "stylelint src/scss/**/*.scss"

@@ -47,13 +47,13 @@
 
     &_heading {
       @include mixins.respond(tablet) {
-        background: url("/src/assets/images/homepage/content-hero-bag.png")
-          center right / contain no-repeat;
+        background: url("../assets/images/homepage/content-hero-bag.png") center
+          right / contain no-repeat;
       }
 
       @include mixins.respond(desktop) {
-        background: url("/src/assets/images/homepage/content-hero-bag.png")
-          center right / contain no-repeat;
+        background: url("../assets/images/homepage/content-hero-bag.png") center
+          right / contain no-repeat;
       }
     }
     &_text {
@@ -162,7 +162,7 @@
       position: relative;
 
       &-bg {
-        background-image: url("/src/assets/images/homepage/hero-right-card-photo.jpg");
+        background-image: url("../assets/images/homepage/hero-right-card-photo.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -355,8 +355,7 @@
 }
 
 .offer {
-  background: url("/src/assets/images/homepage/banner.jpg") center/cover
-    no-repeat;
+  background: url("../assets/images/homepage/banner.jpg") center/cover no-repeat;
   background-size: 650%;
   @include mixins.respond(tablet) {
     @include mixins.flex-row(space-between, center, 0);

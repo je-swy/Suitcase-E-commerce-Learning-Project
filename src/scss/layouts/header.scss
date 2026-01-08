@@ -250,6 +250,8 @@
 }
 
 .modal {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   inset: 0;
   background: rgba(vars.$black, 0.6);

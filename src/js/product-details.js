@@ -6,7 +6,7 @@ import { renderBlock, resolveAssetPath, esc } from './product-renderer.js';
 import { addToCart } from './cart.js';
 
 // Render star rating based on a numeric value (0-5)
-function renderRatingStars (rating) {
+function renderRatingStars(rating) {
   const fullStars = Math.floor(rating);
   const emptyStars = 5 - fullStars;
   const starsHTML = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
@@ -16,7 +16,7 @@ function renderRatingStars (rating) {
 // function to handle tab switching
 // it adds click event listeners to tab buttons
 // when a tab button is clicked, it activates the corresponding tab pane and deactivates others
-function handleTabs () {
+function handleTabs() {
   const tabContainer = document.querySelector('.product-tabs-container');
   if (!tabContainer) return;
 
@@ -46,7 +46,7 @@ function handleTabs () {
 }
 
 // function to handle review form submission
-function handleReviewForm () {
+function handleReviewForm() {
   const form = document.getElementById('review-form');
   if (!form) return;
 
@@ -85,7 +85,7 @@ function handleReviewForm () {
 }
 
 // Initialize thumbnail gallery functionality
-function initThumbnailGallery () {
+function initThumbnailGallery() {
   const mainImage = document.querySelector('.product-details__img');
   const thumbnails = document.querySelectorAll('#thumbnail-gallery img');
 
@@ -112,14 +112,14 @@ function initThumbnailGallery () {
 }
 
 // Render related products (4 random products excluding current)
-function secureRandom () {
+function secureRandom() {
   const buf = new Uint32Array(1);
   crypto.getRandomValues(buf);
   return buf[0] / (0xffffffff + 1);
 }
 
 // Main function to initialize product details page
-export async function initProductDetails () {
+export async function initProductDetails() {
   const allProducts = await loadProducts();
   const productDetailsContainer = document.getElementById('product-details');
   // Get product ID from URL query parameters
@@ -178,10 +178,10 @@ export async function initProductDetails () {
           </div>
           <article class='secure-checkout'>
             <span>Payment:</span>
-              <img src='${esc(resolveAssetPath('/src/assets/images/visa-pay-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
-              <img src='${esc(resolveAssetPath('/src/assets/images/american-express-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
-              <img src='${esc(resolveAssetPath('/src/assets/images/master-card-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
-              <img src='${esc(resolveAssetPath('/src/assets/images/paypal-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
+              <img src='${esc(resolveAssetPath('./assets/images/visa-pay-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
+              <img src='${esc(resolveAssetPath('./assets/images/american-express-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
+              <img src='${esc(resolveAssetPath('./assets/images/master-card-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
+              <img src='${esc(resolveAssetPath('./assets/images/paypal-logo.svg'))}' alt='Secure Checkout' class='secure-checkout-img' />
           </article>
         </article>
       </section>

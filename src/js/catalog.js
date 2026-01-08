@@ -30,7 +30,7 @@ const activeFilters = {
   sortBy: 'default'
 };
 
-function renderPagination (totalPages) {
+function renderPagination(totalPages) {
   paginationContainer.innerHTML = '';
   if (totalPages <= 1) return;
   const prevButton = document.createElement('button');
@@ -61,14 +61,14 @@ function renderPagination (totalPages) {
   paginationContainer.appendChild(nextButton);
 }
 
-function renderWidgetRatingStars (rating) {
+function renderWidgetRatingStars(rating) {
   const fullStars = Math.floor(rating);
   const emptyStars = 5 - fullStars;
   const starsHTML = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
   return `<span class="rating-stars" aria-label="Rating: ${rating} out of 5 stars">${starsHTML}</span>`;
 }
 
-function shuffleArray (array) {
+function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const buf = new Uint32Array(1);
     crypto.getRandomValues(buf);
@@ -78,7 +78,7 @@ function shuffleArray (array) {
   return array;
 }
 
-function renderTopSets () {
+function renderTopSets() {
   const sets = allProducts.filter(p => p.category === 'luggage sets');
   const setsCopy = [...sets];
   const shuffledSets = shuffleArray(setsCopy);
@@ -92,11 +92,11 @@ function renderTopSets () {
     const ratingHtml = product.rating ? renderWidgetRatingStars(product.rating) : '';
     return `
       <li>
-        <a href="/src/pages/product-details-template.html?id=${esc(product.id)}">
+        <a href="./pages/product-details-template.html?id=${esc(product.id)}">
           <img src="${esc(resolveAssetPath(product.imageUrl))}" alt="${esc(product.name)}">
         </a>
         <article>
-          <a href="/src/pages/product-details-template.html?id=${esc(product.id)}">${esc(product.name)}</a>
+          <a href="./pages/product-details-template.html?id=${esc(product.id)}">${esc(product.name)}</a>
           <br>
           ${ratingHtml}
           <p>$${product.price.toFixed(2)}</p>
@@ -106,7 +106,7 @@ function renderTopSets () {
   }).join('');
 }
 
-function updateResultsCount (totalFilteredProducts, productsOnPage) {
+function updateResultsCount(totalFilteredProducts, productsOnPage) {
   if (totalFilteredProducts === 0) {
     resultsContainer.textContent = '';
     return;
@@ -121,7 +121,7 @@ function updateResultsCount (totalFilteredProducts, productsOnPage) {
  * @param {string} sizeValue - The value from the filter.
  * @returns {string[]} An array of simple sizes, e.g., ['S', 'M', 'L'].
  */
-function parseSizeFilter (sizeValue) {
+function parseSizeFilter(sizeValue) {
   if (!sizeValue) return [];
   if (!sizeValue.includes(',') && !sizeValue.includes('-')) {
     return [sizeValue];
@@ -138,7 +138,7 @@ function parseSizeFilter (sizeValue) {
   return [sizeValue];
 }
 
-function updateProductList () {
+function updateProductList() {
   let productsToRender = [...allProducts];
   const searchQuery = activeFilters.searchQuery.trim().toLowerCase();
 
@@ -187,7 +187,7 @@ function updateProductList () {
   }
 }
 
-function handleStateChange () {
+function handleStateChange() {
   currentPage = 1;
   updateProductList();
 }
@@ -195,7 +195,7 @@ function handleStateChange () {
 /**
  * Sets up all event listeners for the filtering system.
  */
-function setupFilterListeners () {
+function setupFilterListeners() {
   // 1. Logic for custom dropdowns (opening/closing)
   filtersForm.addEventListener('click', (event) => {
     const dropdownButton = event.target.closest('.filter-label');
@@ -260,7 +260,7 @@ function setupFilterListeners () {
       if (!query) return;
       const exactMatch = allProducts.find(p => p.id.toLowerCase() === query);
       if (exactMatch) {
-        globalThis.location.href = `/src/pages/product-details-template.html?id=${exactMatch.id}`;
+        globalThis.location.href = `../pages/product-details-template.html?id=${exactMatch.id}`;
       }
     });
   }
@@ -305,7 +305,7 @@ function setupFilterListeners () {
 }
 
 // Main initialization function for the catalog page
-export async function initCatalog () {
+export async function initCatalog() {
   allProducts = await loadProducts('../assets/data.json');
   updateProductList();
   renderTopSets();

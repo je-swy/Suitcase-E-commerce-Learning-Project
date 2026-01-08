@@ -1,5 +1,5 @@
 // Simple carousel functionality
-export function initCarousel () {
+export function initCarousel() {
   // Get carousel elements
   const list = document.getElementById('carousel-list');
   const prevBtn = document.querySelector('.carousel-prev');
@@ -12,7 +12,7 @@ export function initCarousel () {
   const gap = Number.parseFloat((listStyle.getPropertyValue('gap'))) || 0;
 
   // Calculate the step size based on the width of a single slide plus the gap
-  function getStep () {
+  function getStep() {
     const slide = list.querySelector('.carousel-item');
     if (!slide) return 0;
     // Get the width of a single slide including margin

@@ -7,7 +7,7 @@ const SHIPPING_COST = 30;
 const DISCOUNT_THRESHOLD = 3000;
 const DISCOUNT_PERCENT = 0.1;
 
-function renderCart () {
+function renderCart() {
   const items = getCartItems();
   const tableBody = document.getElementById('cart-items-body');
   const cartLayout = document.querySelector('.cart-layout');
@@ -29,7 +29,7 @@ function renderCart () {
         <img src="${esc(resolveAssetPath(item.imageUrl))}" alt="${esc(item.name)}" class="cart-item-img" />
       </td>
       <td class="col-product" data-label="Item">
-        <a href="/src/pages/product-details-template.html?id=${esc(item.id)}" class="cart-item-name">${esc(item.name)}</a>
+        <a href="product-details-template.html?id=${esc(item.id)}" class="cart-item-name">${esc(item.name)}</a>
       </td>
       <td class="col-price" data-label="Price">$${item.price.toFixed(2)}</td>
       <td class="col-quantity" data-label="Amount">
@@ -42,7 +42,7 @@ function renderCart () {
       <td class="col-total" data-label="Total">$${(item.price * item.qty).toFixed(2)}</td>
       <td class="col-delete">
         <button type="button" class="cart-item-remove" aria-label="Remove item">
-          <img src="${esc(resolveAssetPath('./src/assets/images/trash-can.svg'))}" alt="Remove" class="cart-item-remove-icon" />
+          <img src="${esc(resolveAssetPath('assets/images/trash-can.svg'))}" alt="Remove" class="cart-item-remove-icon" />
         </button>
       </td>
     </tr>
@@ -52,7 +52,7 @@ function renderCart () {
   globalThis.dispatchEvent(new CustomEvent('cart-updated'));
 }
 
-function updateSummary (items) {
+function updateSummary(items) {
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
   const discount = subtotal > DISCOUNT_THRESHOLD ? subtotal * DISCOUNT_PERCENT : 0;
   const total = subtotal > 0 ? subtotal - discount + SHIPPING_COST : 0;
@@ -71,7 +71,7 @@ function updateSummary (items) {
   document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
 }
 
-function initCartPage () {
+function initCartPage() {
   renderCart();
   globalThis.addEventListener('cart-updated', renderCart);
 

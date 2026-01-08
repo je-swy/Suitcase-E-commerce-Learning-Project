@@ -6,7 +6,7 @@ import { getCartItems, setCartItems } from './cart-ui.js';
 import { loadProducts } from './products-data.js';
 
 // Generate a unique key for a cart item based on product ID and its options (size, color)
-function getCartItemKey (product) {
+function getCartItemKey(product) {
   const size = product.size || 'default';
   const color = product.color || 'default';
   return `${product.id}-${size}-${color}`;
@@ -15,7 +15,7 @@ function getCartItemKey (product) {
 // this function add a product to the cart
 // and if the product already exists in the cart, it increases its quantity
 // and it dispatches a 'cart-updated' event to notify other parts of the app
-export function addToCart (product, quantity = 1) {
+export function addToCart(product, quantity = 1) {
   const items = getCartItems();
   const itemKey = getCartItemKey(product);
 
@@ -37,7 +37,7 @@ export function addToCart (product, quantity = 1) {
 // when an "Add to Cart" button is clicked, it retrieves the product ID from the button's data attributes
 // if the product data is not already loaded, it loads it from a JSON file
 // then it finds the product by ID and calls addToCart to add it to the cart
-export function attachCartDelegation () {
+export function attachCartDelegation() {
   document.body.addEventListener('click', async (e) => {
     const btn = e.target.closest('[data-action="add-to-cart"]');
     if (!btn) return;
@@ -50,7 +50,7 @@ export function attachCartDelegation () {
     if (!id) return;
 
     if (!globalThis.PRODUCTS || globalThis.PRODUCTS.length === 0) {
-      await loadProducts('/src/assets/data.json');
+      await loadProducts('../assets/data.json');
     }
 
     const product = globalThis.PRODUCT_INDEX?.get(id) || globalThis.PRODUCTS?.find(p => String(p.id) === String(id));
