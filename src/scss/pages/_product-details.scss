@@ -106,9 +106,12 @@
 .thumbnail-gallery {
   @include mixins.flex-row(space-between, center, 15px);
   margin-top: 10px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none; // for Firefox
   img {
-    width: 80px;
     height: 80px;
+    flex: 1;
     object-fit: cover;
     cursor: pointer;
     border: 2px solid transparent;
@@ -116,7 +119,6 @@
       border-color: vars.$pink;
     }
     @include mixins.respond(tablet) {
-      width: 140px;
       height: 140px;
     }
   }

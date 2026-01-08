@@ -88,15 +88,25 @@ function renderTopSets() {
     console.error('Render Top Sets: list element not found');
     return;
   }
+
+  // check if we are in pages folder
+  const isPagesFolder = window.location.pathname.includes('/pages/');
+
+  // and prepare link base accordingly
+  const linkBase = isPagesFolder ? '.' : './pages';
+
   listElement.innerHTML = randomSets.map(product => {
     const ratingHtml = product.rating ? renderWidgetRatingStars(product.rating) : '';
+
+    const productLink = `${linkBase}/product-details-template.html?id=${esc(product.id)}`;
+
     return `
       <li>
-        <a href="./pages/product-details-template.html?id=${esc(product.id)}">
-          <img src="${esc(resolveAssetPath(product.imageUrl))}" alt="${esc(product.name)}">
+        <a href="${productLink}">
+           <img src="${esc(resolveAssetPath(product.imageUrl))}" alt="${esc(product.name)}">
         </a>
         <article>
-          <a href="./pages/product-details-template.html?id=${esc(product.id)}">${esc(product.name)}</a>
+          <a href="${productLink}">${esc(product.name)}</a>
           <br>
           ${ratingHtml}
           <p>$${product.price.toFixed(2)}</p>

@@ -93,19 +93,19 @@ function initThumbnailGallery() {
   if (!mainImage || thumbnails.length === 0) return;
 
   // add click event listeners to each thumbnail
-  const thumbnailsContainer = document.querySelector('.thumbnails-container');
+  const thumbnailsContainer = document.getElementById('thumbnail-gallery');
 
   for (const thumb of thumbnails) {
     thumb.addEventListener('click', () => {
       mainImage.src = thumb.src;
 
-      // 1. Find the currently active thumbnail and make it inactive
+      // find the currently active thumbnail and make it inactive
       const currentActive = thumbnailsContainer.querySelector('.active');
       if (currentActive) {
         currentActive.classList.remove('active');
       }
 
-      // 2. Make the clicked thumbnail active
+      // mke the clicked thumbnail active
       thumb.classList.add('active');
     });
   }

@@ -59,12 +59,20 @@ export async function loadProducts(url = './assets/data.json') {
 
 /** Return array of possible data file locations */
 function buildCandidates(url) {
+  // check if we are in the pages folder
+  const isPagesFolder = window.location.pathname.includes('/pages/');
+
+  // if we are in pages, prioritize ../assets/data.json
+  // otherwise, prioritize ./assets/data.json
+  const priorityPath = isPagesFolder ? '../assets/data.json' : './assets/data.json';
+
+  // prioritize the given URL, then common locations
   return unique([
+    priorityPath,
     url,
     './assets/data.json',
-    '/assets/data.json',
-    './assets/data.json',
     '../assets/data.json',
+    '/assets/data.json',
     '/data.json',
     './data.json'
   ]);

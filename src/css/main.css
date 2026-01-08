@@ -1754,10 +1754,13 @@ button {
   align-items: center;
   gap: 15px;
   margin-top: 10px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 .thumbnail-gallery img {
-  width: 80px;
   height: 80px;
+  flex: 1;
   object-fit: cover;
   cursor: pointer;
   border: 2px solid transparent;
@@ -1767,7 +1770,6 @@ button {
 }
 @media (min-width: 1024px) {
   .thumbnail-gallery img {
-    width: 140px;
     height: 140px;
   }
 }

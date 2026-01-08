@@ -49,7 +49,6 @@ function renderCart() {
   `).join('');
 
   updateSummary(items);
-  globalThis.dispatchEvent(new CustomEvent('cart-updated'));
 }
 
 function updateSummary(items) {
@@ -101,6 +100,7 @@ function initCartPage() {
 
       setCartItems(items);
       renderCart();
+      globalThis.dispatchEvent(new CustomEvent('cart-updated'));
     });
   }
 
